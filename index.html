@@ -29,13 +29,16 @@
   .viz-wrapper { flex: 1; position: relative; overflow: hidden; }
   svg { display: block; cursor: grab; }
   svg:active { cursor: grabbing; }
-  .detail-panel { width: 380px; background: #1a2332; border-left: 1px solid #2a3a4f; padding: 20px; overflow-y: auto; }
+  .detail-panel { width: 400px; background: #1a2332; border-left: 1px solid #2a3a4f; padding: 20px; overflow-y: auto; }
   .detail-panel h2 { font-size: 14px; color: #8fb4e0; margin: 0 0 10px; }
   .detail-panel.empty { color: #6b7c95; font-style: italic; font-size: 12px; line-height: 1.6; }
   .theme-title { font-size: 17px; color: #fff; font-weight: bold; margin: 4px 0 8px; }
   .theme-meta { font-size: 11px; color: #8fb4e0; margin-bottom: 10px; }
   .theme-meta span { background: #2a3a4f; padding: 2px 8px; border-radius: 3px; margin-right: 6px; }
-  .theme-summary { font-size: 13px; line-height: 1.7; color: #c5d4e8; margin-bottom: 16px; }
+  .theme-summary { font-size: 13px; line-height: 1.7; color: #c5d4e8; margin-bottom: 12px; }
+  .orgs-section { margin-top: 12px; padding-top: 10px; border-top: 1px dashed #2a3a4f; }
+  .orgs-title { font-size: 12px; color: #8fb4e0; margin-bottom: 8px; font-weight: bold; }
+  .org-chip { display: inline-block; background: #2a3a4f; color: #e0e6ed; padding: 3px 8px; margin: 2px 4px 2px 0; border-radius: 3px; font-size: 11px; line-height: 1.4; border-left: 2px solid #2e75b6; }
   .connections-section { margin-top: 16px; padding-top: 12px; border-top: 1px solid #2a3a4f; }
   .connection-row { padding: 8px 0; border-bottom: 1px dashed #2a3a4f; font-size: 12px; cursor: pointer; transition: background 0.15s; }
   .connection-row:hover { background: #2a3a4f; padding-left: 6px; }
@@ -52,7 +55,7 @@
   .node.dimmed { opacity: 0.15; }
   .node circle.highlighted { stroke: #fff; stroke-width: 3; }
   .stats { font-size: 11px; color: #6b7c95; margin-top: 8px; line-height: 1.6; }
-  .tooltip { position: absolute; background: rgba(0,0,0,0.92); color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 11px; pointer-events: none; display: none; max-width: 280px; line-height: 1.5; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+  .tooltip { position: absolute; background: rgba(0,0,0,0.92); color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 11px; pointer-events: none; display: none; max-width: 320px; line-height: 1.5; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
   .zoom-controls { position: absolute; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 4px; }
   .zoom-btn { width: 36px; height: 36px; background: rgba(26, 35, 50, 0.95); color: #e0e6ed; border: 1px solid #2a3a4f; border-radius: 4px; font-size: 16px; cursor: pointer; }
   .zoom-btn:hover { background: #2a3a4f; }
@@ -61,7 +64,7 @@
 <body>
 <header>
   <h1>宇宙戦略基金 技術開発テーマ連携ネットワーク</h1>
-  <div class="subtitle">第一期・第二期の全採択テーマ間の技術的つながりを予測</div>
+  <div class="subtitle">第一期・第二期の全採択テーマ間の技術的つながりを予測（Elevation Space × 日本低軌道社中 MoUを起点に）／各テーマの採択機関情報付き</div>
 </header>
 <div class="container">
 
@@ -94,6 +97,7 @@
       <h2>操作ガイド</h2>
       <div class="legend">
         ・ノードをクリック→詳細表示<br>
+        ・マウスオーバー→採択機関プレビュー<br>
         ・ノードをドラッグ→位置調整<br>
         ・スクロール/ボタン→ズーム<br>
         ・空欄クリック→選択解除
@@ -115,8 +119,8 @@
   <aside class="detail-panel">
     <div id="detail" class="empty">
       <h2>技術テーマ詳細</h2>
-      <p>左の図でノード（円）をクリックすると、テーマの概要・他テーマとの技術的つながりがここに表示されます。</p>
-      <p style="margin-top:20px; font-size:11px; color:#6b7c95">この図は、宇宙戦略基金第一期・第二期の全採択テーマ（46件）について、技術的補完性・バリューチェーン上の連結・基盤共通性の3観点から、テーマ間に想定される技術的つながりを予測したものです。Elevation Space × 日本低軌道社中のMoU（2026年5月）と同様の「テーマ間連携」が今後どこで生まれうるかを可視化しています。</p>
+      <p>左の図でノード（円）をクリックすると、テーマの概要・採択機関・他テーマとの技術的つながりがここに表示されます。</p>
+      <p style="margin-top:20px; font-size:11px; color:#6b7c95">この図は、宇宙戦略基金第一期・第二期の全採択テーマ（54件）について、技術的補完性・バリューチェーン上の連結・基盤共通性の3観点から、テーマ間に想定される技術的つながりを予測したものです。Elevation Space × 日本低軌道社中のMoU（2026年5月）と同様の「テーマ間連携」が今後どこで生まれうるかを可視化しています。</p>
     </div>
   </aside>
 
@@ -125,133 +129,184 @@
 <script>
 // ============================================================
 // テーマ（ノード）データ
-// id, label, cat, period, summary
-// cat: transport=宇宙輸送, satellite=衛星等, exploration=探査等, common=分野共通
 // ============================================================
 const nodes = [
   // ===== 宇宙輸送（第一期） =====
   { id: "T1", label: "輸送機軽量化\n(CFRP/3D積層)", cat: "transport", period: 1,
-    summary: "ロケット推進薬タンク等の熱可塑CFRP化、金属3D積層(WAAM)による大型構造部品製造。担当：丸八、ニコン、清水建設、三菱重工。" },
+    orgs: ["丸八(熱可塑CFRP)", "ニコン(精密3D積層)", "清水建設(大型3D積層)", "三菱重工(大型3D積層)"],
+    summary: "ロケット推進薬タンク等の熱可塑CFRP化、金属3D積層(WAAM)による大型構造部品製造。" },
   { id: "T2", label: "固体モータ\n材料量産", cat: "transport", period: 1,
-    summary: "固体モータ主要材料(推進薬、CFRPケース等)の量産化技術。担当：IHIエアロスペース。" },
+    orgs: ["IHIエアロスペース"],
+    summary: "固体モータ主要材料(推進薬、CFRPケース等)の量産化技術。" },
   { id: "T3", label: "再使用機回収", cat: "transport", period: 1,
-    summary: "将来再使用ロケットの洋上回収システム。担当：日本郵船。三菱重工と共同開発、2025年AiP取得。" },
+    orgs: ["日本郵船"],
+    summary: "将来再使用ロケットの洋上回収システム。三菱重工と共同開発、2025年AiP取得。" },
   { id: "T4", label: "高頻度射場\n地上系", cat: "transport", period: 1,
-    summary: "打上げ高頻度化を実現する地上系基盤技術(HOSPO)。担当：SPACE COTAN。" },
+    orgs: ["SPACE COTAN"],
+    summary: "打上げ高頻度化を実現する地上系基盤技術(HOSPO)。" },
   { id: "T5", label: "統合航法装置", cat: "transport", period: 1,
-    summary: "宇宙輸送システムの統合航法装置(慣性+GNSS)の開発。担当：三菱プレシジョン。" },
+    orgs: ["三菱プレシジョン"],
+    summary: "宇宙輸送システムの統合航法装置(慣性+GNSS)の開発。" },
   // ===== 宇宙輸送（第二期） =====
   { id: "T6", label: "有人輸送\n与圧キャビン", cat: "transport", period: 2,
-    summary: "有人宇宙輸送システムの与圧キャビン基盤技術。担当：岩谷技研、宇宙システム開発。" },
+    orgs: ["岩谷技研", "宇宙システム開発"],
+    summary: "有人宇宙輸送システムの与圧キャビン基盤技術。" },
   { id: "T7", label: "異常検知\n離脱機能", cat: "transport", period: 2,
-    summary: "有人輸送系の異常検知・離脱機能。担当：三菱重工、将来宇宙輸送システム。" },
+    orgs: ["将来宇宙輸送システム", "三菱重工"],
+    summary: "有人輸送系の異常検知・離脱機能。" },
   { id: "T8", label: "射場高頻度\n汎用設備FS", cat: "transport", period: 2,
-    summary: "射場における高頻度打上げに資する汎用設備のあり方FS。担当：IHIエアロスペース。" },
+    orgs: ["IHIエアロスペース"],
+    summary: "射場における高頻度打上げに資する汎用設備のあり方FS。" },
   { id: "T9", label: "ロケット部品\nコンポーネント", cat: "transport", period: 2,
-    summary: "高頻度打上げに資するロケット部品・コンポーネント開発。担当：NECスペーステクノロジー、Space BD、川崎重工、イーグル工業、エア・ウォーター、シンフォニア、SUIHO、MJOLNIR。" },
+    orgs: ["イーグル工業", "エア・ウォーター", "NECスペーステクノロジー", "シンフォニアテクノロジー", "SUIHO SPACE INNOVATIONS", "Space BD(連携:川崎重工)", "MJOLNIR SPACEWORKS"],
+    summary: "高頻度打上げに資するロケット部品・コンポーネント開発。" },
   { id: "T10", label: "製造プロセス\n刷新", cat: "transport", period: 2,
-    summary: "高頻度打上げに資するロケット製造プロセス刷新(素材・加工)。担当：IHI、赤星工業、スペースワン、東レ・カーボンマジック、徳田工業、光製作所、富士精工、北斗、UACJ。" },
+    orgs: ["IHI", "赤星工業", "スペースワン", "東レ・カーボンマジック", "徳田工業", "光製作所", "富士精工", "北斗", "UACJ"],
+    summary: "高頻度打上げに資するロケット製造プロセス刷新(素材・加工)。" },
   { id: "T11", label: "スマート射場", cat: "transport", period: 2,
-    summary: "スマート射場の実現に向けた基盤システム技術。" },
+    orgs: ["(現時点で採択者なし)"],
+    summary: "スマート射場の実現に向けた基盤システム技術。第二期で公募されたが採択未確定。" },
 
   // ===== 衛星等（第一期） =====
   { id: "S1", label: "衛星量子暗号\n通信", cat: "satellite", period: 1,
-    summary: "衛星量子暗号通信(QKD)技術の開発・実証。担当：NICT。" },
+    orgs: ["情報通信研究機構(NICT)"],
+    summary: "衛星量子暗号通信(QKD)技術の開発・実証。" },
   { id: "S2", label: "光ルータ\n通信技術", cat: "satellite", period: 1,
-    summary: "衛星コンステレーション構築に必要な通信技術(光ルータ)。担当：NEC。" },
+    orgs: ["日本電気(NEC)"],
+    summary: "衛星コンステレーション構築に必要な通信技術(光ルータ)。" },
   { id: "S3", label: "商業衛星\nコンステ加速", cat: "satellite", period: 1,
-    summary: "商業衛星コンステレーション構築加速化。担当：NEC、アークエッジ・スペース、QPS研究所、Synspective。" },
+    orgs: ["アークエッジ・スペース", "QPS研究所", "Synspective", "日本電気(NEC)"],
+    summary: "商業衛星コンステレーション構築加速化。" },
   { id: "S4", label: "高分解能光学\n衛星", cat: "satellite", period: 1,
-    summary: "高分解能・高頻度な光学衛星観測システム。担当：Marble Visions。" },
+    orgs: ["Marble Visions"],
+    summary: "高分解能・高頻度な光学衛星観測システム。NTTデータ・PASCO・キヤノン電子と資本業務提携。" },
   { id: "S5", label: "衛星ライダー\n(高出力レーザ)", cat: "satellite", period: 1,
-    summary: "高出力レーザの宇宙適用による革新的衛星ライダー技術。担当：京都大学。" },
+    orgs: ["京都大学"],
+    summary: "高出力レーザの宇宙適用による革新的衛星ライダー技術。" },
   { id: "S6", label: "高精度衛星\n編隊飛行", cat: "satellite", period: 1,
-    summary: "高精度衛星編隊飛行技術。担当：インターステラ、名古屋大、東京大学。" },
+    orgs: ["インターステラテクノロジズ", "名古屋大学", "東京大学"],
+    summary: "高精度衛星編隊飛行技術。" },
   { id: "S7", label: "衛星部品\nサプライチェーン", cat: "satellite", period: 1,
-    summary: "衛星部品・コンポーネントのサプライチェーン構築。担当：ウェルリサーチ、NECスペース、NU-Rei、コンポジットテーラーズ、シャープエネルギーソリューション、GSユアサテクノロジー、三菱電機、INDUSTRIAL-X、JSPI、出光興産、太陽金網、ナノブリッジセミコン。" },
+    orgs: ["ウェルリサーチ", "NECスペーステクノロジー", "NU-Rei", "コンポジットテーラーズ", "シャープエネルギーソリューション", "GSユアサテクノロジー", "三菱電機(補助+委託)", "INDUSTRIAL-X", "衛星システム技術推進機構(JSPI)", "出光興産(追加公募)", "太陽金網(追加公募)", "ナノブリッジ・セミコンダクター(追加公募)"],
+    summary: "衛星部品・コンポーネントのサプライチェーン構築。多数の企業が参画する第一期最大級の協業領域。" },
   { id: "S8", label: "衛星データ\n海外実証FS", cat: "satellite", period: 1,
-    summary: "衛星データ利用システム海外実証FS。担当：ウミトロン、オーシャンアイズ、OST、Space Tech Accelerator、Solafune、パシフィックコンサルタンツ、日本宇宙フォーラム。" },
+    orgs: ["ウミトロン", "オーシャンアイズ", "オーシャンソリューションテクノロジー", "Space Tech Accelerator", "Solafune", "パシフィックコンサルタンツ", "日本宇宙フォーラム"],
+    summary: "衛星データ利用システム海外実証FS。漁業/IUU/防災等で海外展開を試行。" },
   // ===== 衛星等（第二期） =====
   { id: "S9", label: "衛星光通信\nデータ中継", cat: "satellite", period: 2,
-    summary: "衛星光通信を活用したデータ中継サービス(LEO-GEO光リレー)。担当：Space Compass。" },
+    orgs: ["Space Compass"],
+    summary: "衛星光通信を活用したデータ中継サービス(LEO-GEO光リレー)。ESA, Hellas Sat等と国際MoU網。" },
   { id: "S10", label: "光通信端末\n相互接続", cat: "satellite", period: 2,
-    summary: "衛星光通信の端末間相互接続技術。担当：ワープスペース。" },
+    orgs: ["ワープスペース"],
+    summary: "衛星光通信の端末間相互接続技術。" },
   { id: "S11", label: "光通信端末\n+衛星バス", cat: "satellite", period: 2,
-    summary: "衛星光通信の実装を見据えた衛星バス・光端末FS。担当：NEC、NICT、三菱電機。" },
+    orgs: ["情報通信研究機構(NICT)", "日本電気(NEC)", "三菱電機"],
+    summary: "衛星光通信の実装を見据えた衛星バス・光端末FS。" },
   { id: "S12", label: "通信ペイロード", cat: "satellite", period: 2,
-    summary: "国際競争力ある通信ペイロード技術。担当：三菱電機。" },
+    orgs: ["三菱電機"],
+    summary: "国際競争力ある通信ペイロード技術。" },
   { id: "S13", label: "衛星×地上\n統合運用", cat: "satellite", period: 2,
-    summary: "衛星通信と地上ネットワークの統合運用(NTN、周波数共用)。担当：楽天モバイル。" },
+    orgs: ["楽天モバイル"],
+    summary: "衛星通信と地上ネットワークの統合運用(NTN、周波数共用)。" },
   { id: "S14", label: "次世代地球\n観測", cat: "satellite", period: 2,
-    summary: "次世代地球観測衛星の観測機能高度化。担当：アクセルスペース、Synspective。" },
+    orgs: ["アクセルスペース(新市場開拓)", "Synspective(既存市場拡大)"],
+    summary: "次世代地球観測衛星の観測機能高度化。" },
   { id: "S15", label: "地球環境衛星\nデータ", cat: "satellite", period: 2,
-    summary: "地球環境衛星データ利用加速。担当：スペースデータ、Tellus、Preferred Networks。" },
+    orgs: ["スペースデータ", "Tellus", "Preferred Networks"],
+    summary: "地球環境衛星データ利用加速。AI・デジタルツインで衛星データを高度活用。" },
   { id: "S16", label: "軌道間\n輸送機(OTV)", cat: "satellite", period: 2,
-    summary: "空間自在移動：軌道間輸送機(OTV)。担当：NEC、三菱電機、Pale Blue。" },
+    orgs: ["日本電気(NEC)", "Pale Blue", "三菱電機"],
+    summary: "空間自在移動：軌道間輸送機(OTV)。" },
   { id: "S17", label: "軌道上\n燃料補給", cat: "satellite", period: 2,
-    summary: "空間自在移動：軌道上燃料補給。担当：アストロスケール。Honda × アストロスケールのMoU(2025)。" },
+    orgs: ["アストロスケール"],
+    summary: "空間自在移動：軌道上燃料補給。Honda × アストロスケールのMoU(2025)。" },
   { id: "S18", label: "宇宙\nロジスティクス", cat: "satellite", period: 2,
-    summary: "空間自在移動：宇宙ロジスティクス(運航計画・需要予測)。担当：横浜国立大学。" },
+    orgs: ["横浜国立大学"],
+    summary: "空間自在移動：宇宙ロジスティクス(運航計画・需要予測)。" },
   { id: "S19", label: "軌道上\n製造・組立", cat: "satellite", period: 2,
-    summary: "空間自在利用：軌道上製造・組立。担当：三菱電機、東レ。" },
+    orgs: ["三菱電機", "東レ"],
+    summary: "空間自在利用：軌道上製造・組立。" },
   { id: "S20", label: "軌道上\n物体除去", cat: "satellite", period: 2,
-    summary: "空間自在利用：軌道上物体除去(デブリ除去)。担当：パワーレーザー。" },
+    orgs: ["パワーレーザー"],
+    summary: "空間自在利用：軌道上物体除去(デブリ除去)。" },
   { id: "S21", label: "宇宙状況\n把握(SSA)", cat: "satellite", period: 2,
-    summary: "空間自在利用：宇宙状況把握(SSA)。担当：IHI、パワーレーザー、Star Signal Solutions。" },
+    orgs: ["Star Signal Solutions(連携:東大木曽観測所)", "IHI", "パワーレーザー"],
+    summary: "空間自在利用：宇宙状況把握(SSA)。" },
   { id: "S22", label: "革新的衛星\nミッション", cat: "satellite", period: 2,
-    summary: "革新的衛星ミッション技術実証支援。担当：Sarmony。" },
+    orgs: ["Sarmony"],
+    summary: "革新的衛星ミッション技術実証支援。" },
   { id: "S23", label: "衛星データ\n実装加速化", cat: "satellite", period: 2,
-    summary: "衛星データ利用システム実装加速化事業。担当：Archeda、ウエスコ、沖電気、Green Carbon、国際航業、住友林業、東京海上レジリエンス、RESTEC、LocationMind、クロスユー、デロイト、野村総研、三菱総研ほか。" },
+    orgs: ["Archeda", "ウエスコ", "沖電気工業", "Green Carbon", "国際航業", "Space Tech Accelerator", "住友林業", "東京海上レジリエンス", "RESTEC(リモートセンシング技術センター)", "LocationMind", "衛星システム技術推進機構(JSPI)", "クロスユー", "デロイトトーマツスペースアンドセキュリティ", "日本宇宙フォーラム", "野村総合研究所", "三菱総合研究所"],
+    summary: "衛星データ利用システム実装加速化事業。第二期で最も参加機関が多い下流テーマ。" },
 
   // ===== 探査等（第一期） =====
   { id: "E1", label: "月水資源\n探査", cat: "exploration", period: 1,
-    summary: "月面の水資源探査技術(センシング)。担当：東京科学大学。" },
+    orgs: ["東京科学大学"],
+    summary: "月面の水資源探査技術(センシング)。" },
   { id: "E2", label: "月-地球間\n通信FS", cat: "exploration", period: 1,
-    summary: "月-地球間通信システムFS。担当：KDDI、福井工業大学。" },
+    orgs: ["KDDI", "福井工業大学"],
+    summary: "月-地球間通信システムFS。" },
   { id: "E3", label: "物資補給\n近傍通信", cat: "exploration", period: 1,
-    summary: "国際競争力ある物資補給システム：近傍通信。担当：日本低軌道社中、三菱電機。" },
+    orgs: ["日本低軌道社中(連携:三菱電機)"],
+    summary: "国際競争力ある物資補給システム：近傍通信。" },
   { id: "E4", label: "物資補給\nドッキング", cat: "exploration", period: 1,
-    summary: "国際競争力ある物資補給システム：ドッキングシステム。担当：IHIエアロスペース。" },
+    orgs: ["IHIエアロスペース"],
+    summary: "国際競争力ある物資補給システム：ドッキングシステム。" },
   { id: "E5", label: "低軌道自律\nモジュール", cat: "exploration", period: 1,
-    summary: "低軌道自律飛行型モジュールシステム技術。担当：日本低軌道社中。" },
+    orgs: ["日本低軌道社中"],
+    summary: "低軌道自律飛行型モジュールシステム技術。HTV-XCの中核。" },
   { id: "E6", label: "低軌道汎用\n実験システム", cat: "exploration", period: 1,
-    summary: "低軌道汎用実験システム技術。担当：Space BD。" },
+    orgs: ["Space BD"],
+    summary: "低軌道汎用実験システム技術。" },
   { id: "E7", label: "再生型\n燃料電池", cat: "exploration", period: 1,
-    summary: "再生型燃料電池システム(月面有人ローバ向け)。担当：トヨタ自動車。" },
+    orgs: ["トヨタ自動車"],
+    summary: "再生型燃料電池システム(月面有人ローバ LUNAR CRUISER向け)。" },
   { id: "E8", label: "半永久電源", cat: "exploration", period: 1,
-    summary: "半永久電源システム(Am241原子力電池)。担当：JAEA。" },
+    orgs: ["日本原子力研究開発機構(JAEA)"],
+    summary: "半永久電源システム(Am241原子力電池)。" },
   { id: "E9", label: "大気突入\n空力減速", cat: "exploration", period: 1,
-    summary: "大気突入・空力減速の低コスト要素技術(展開型エアロシェル)。担当：NeSTRA。" },
+    orgs: ["次世代宇宙システム技術研究組合(NeSTRA)"],
+    summary: "大気突入・空力減速の低コスト要素技術(展開型エアロシェル)。Mars Touch Projectで実証。" },
   { id: "E10", label: "月測位\nシステム", cat: "exploration", period: 1,
-    summary: "月測位システム技術。担当：アークエッジ・スペース。" },
+    orgs: ["アークエッジ・スペース"],
+    summary: "月測位システム技術。" },
   // ===== 探査等（第二期） =====
   { id: "E11", label: "軌道上\nデータセンター", cat: "exploration", period: 2,
-    summary: "軌道上データセンター構築技術。担当：SpaceBlast。" },
+    orgs: ["SpaceBlast"],
+    summary: "軌道上データセンター構築技術。" },
   { id: "E12", label: "高頻度\n物資回収", cat: "exploration", period: 2,
-    summary: "高頻度物資回収システム技術(ELS-RS)。担当：ElevationSpace。" },
+    orgs: ["ElevationSpace"],
+    summary: "高頻度物資回収システム技術(ELS-RS)。低軌道社中・ispace・Exobiosphereと多面MoU。" },
   { id: "E13", label: "月極域\n高精度着陸", cat: "exploration", period: 2,
-    summary: "月極域における高精度着陸技術。担当：ispace。" },
+    orgs: ["ispace"],
+    summary: "月極域における高精度着陸技術。SMBCがオフィシャルパートナーに。" },
   { id: "E14", label: "月面インフラ", cat: "exploration", period: 2,
-    summary: "月面インフラ構築に資する要素技術(測量・地盤調査等)。担当：東京大学、東北大学、立命館。" },
+    orgs: ["東京大学", "東北大学", "立命館大学"],
+    summary: "月面インフラ構築に資する要素技術(測量・地盤調査等)。立命館×コマツ×ispaceで採択。" },
   { id: "E15", label: "船外利用\n効率化", cat: "exploration", period: 2,
-    summary: "船外利用効率化技術。担当：日本低軌道社中。" },
+    orgs: ["日本低軌道社中"],
+    summary: "船外利用効率化技術。" },
 
   // ===== 分野共通 =====
   { id: "C1", label: "SX研究開発\n拠点", cat: "common", period: 1,
-    summary: "SX研究開発拠点(第一期)。名古屋大学(デトネーション)、東京大学(太陽電池/資源)、立命館(月面産業化)、国立天文台。" },
+    orgs: ["名古屋大学(デトネーション牽引型)", "東京大学(宇宙資源牽引型)", "東京大学(次世代太陽電池牽引型)", "立命館大学(月面産業化共用型)", "国立天文台(共用型)"],
+    summary: "SX研究開発拠点(第一期)。多数の大学・企業が連携機関として参画する産学連携プラットフォーム。" },
   { id: "C2", label: "SX-CRANE\n新産業創出", cat: "common", period: 2,
-    summary: "宇宙転用・新産業シーズ創出拠点SX-CRANE。東京科学大、東京海洋大、山形大、早稲田大の5拠点。" },
+    orgs: ["東京海洋大学(PNT)", "東京科学大学(2件:有人居住, 健康)", "山形大学(宇宙食)", "早稲田大学(宇宙QOL)"],
+    summary: "宇宙転用・新産業シーズ創出拠点SX-CRANE。私大唯一の代表機関を含む5拠点。" },
   { id: "C3", label: "SX-ARK\n熱とデバイス", cat: "common", period: 2,
-    summary: "SX-ARK(中核領域)：熱とデバイス。岩手大、エネコート、愛媛大、大熊ダイヤモンドデバイス、大阪大、キオクシア、産総研、ダイキン、名工大、北大、名古屋大。" },
+    orgs: ["岩手大学", "エネコートテクノロジーズ", "愛媛大学", "大熊ダイヤモンドデバイス", "大阪大学", "キオクシア", "ケミトックス", "産業技術総合研究所", "ダイキン工業", "名古屋工業大学", "名古屋大学(2件)", "北海道大学"],
+    summary: "SX-ARK(中核領域)：熱とデバイス。ペロブスカイト太陽電池、ダイヤモンド半導体等の宇宙応用研究。" },
   { id: "C4", label: "SX-ARK\n運動と制御", cat: "common", period: 2,
-    summary: "SX-ARK(中核領域)：運動と制御。九大、神戸大、三洋化成、島根大、SteraVision、東京理科大、日本化薬、八田・山本、パッチドコニックス、フコク、横国大、東大、名大、京大、NECスペース、産総研、東北大、国立天文台。" },
+    orgs: ["NECスペーステクノロジー", "九州大学", "京都大学", "神戸大学", "産業技術総合研究所", "三洋化成工業", "国立天文台", "島根大学", "SteraVision", "東京大学", "東京理科大学", "東北大学", "名古屋大学", "日本化薬", "八田・山本宇宙推進機製作所", "パッチドコニックス", "フコク", "横浜国立大学"],
+    summary: "SX-ARK(中核領域)：運動と制御。マイクロ波放電型イオンエンジン等、衛星推進・編隊飛行の基盤研究。" },
   { id: "C5", label: "宇宙機\n環境試験", cat: "common", period: 2,
-    summary: "宇宙機の環境試験(各種環境、放射線試験)。担当：IMV、JAEA、高エネルギー加速器研究機構、理化学研究所、QST、SEESE。" },
+    orgs: ["IMV(各種環境試験)", "高エネルギー加速器研究機構", "日本原子力研究開発機構(2件)", "理化学研究所", "量子科学技術研究開発機構(QST)", "SEESE"],
+    summary: "宇宙機の環境試験(各種環境、放射線試験)。国研中心の試験設備整備。" },
 ];
 
 // ============================================================
 // 連携（エッジ）データ
-// source, target, type: direct|synergy|foundation|emerging, reason
 // ============================================================
 const links = [
   // === 進行中／公表済の連携(emerging) ===
@@ -262,7 +317,6 @@ const links = [
   { source: "E12", target: "E9", type: "emerging", reason: "NeSTRA × ElevationSpace × 藤倉航装の共同実施。大気突入技術と回収システムは技術的に直結。" },
 
   // === 直接連結(direct) ===
-  // 宇宙輸送内
   { source: "T1", target: "T10", type: "direct", reason: "軽量化技術(CFRP/3D積層)が高頻度製造プロセスの素材技術として直接適用される。" },
   { source: "T2", target: "T9", type: "direct", reason: "固体モータ材料は高頻度打上げのロケット部品コンポーネントとして組み込まれる。" },
   { source: "T3", target: "T8", type: "direct", reason: "再使用機回収と射場高頻度化は再使用ロケットの実運用で表裏一体。" },
@@ -273,7 +327,6 @@ const links = [
   { source: "T5", target: "T7", type: "direct", reason: "統合航法装置は有人輸送の異常検知・離脱機能の安全担保技術として組み込まれる。" },
   { source: "T6", target: "T7", type: "direct", reason: "有人宇宙輸送の与圧キャビンと異常検知離脱は同テーマの両輪。" },
 
-  // 衛星等内（光通信スタック）
   { source: "S2", target: "S9", type: "direct", reason: "光ルータ通信技術が光データ中継サービスの装置技術として組み込まれる。" },
   { source: "S9", target: "S10", type: "direct", reason: "光データ中継サービスと端末間相互接続技術は同一の光通信スタックの異なる層。" },
   { source: "S10", target: "S11", type: "direct", reason: "端末間相互接続技術が衛星バス・光通信端末FSに統合される。" },
@@ -281,7 +334,6 @@ const links = [
   { source: "S12", target: "S13", type: "direct", reason: "通信ペイロードと衛星×地上統合運用は同じ衛星通信サービスの異なる側面。" },
   { source: "S1", target: "S9", type: "direct", reason: "量子暗号通信は光データ中継サービスの暗号化レイヤーとして組み込まれる。" },
 
-  // 衛星等内（観測スタック）
   { source: "S3", target: "S4", type: "direct", reason: "光学コンステレーションの加速化と高分解能光学衛星は同事業領域。Marble Visions × アクセルスペース等。" },
   { source: "S3", target: "S14", type: "direct", reason: "商業衛星コンステの第二期発展形が次世代地球観測。" },
   { source: "S6", target: "S14", type: "direct", reason: "編隊飛行が次世代地球観測のCO2モニタリング等で活用される(アクセル+ANA等の採択コンソ)。" },
@@ -290,7 +342,6 @@ const links = [
   { source: "S15", target: "S23", type: "direct", reason: "地球環境衛星データとデータ実装加速化は同じ下流活用層。" },
   { source: "S4", target: "S23", type: "direct", reason: "高分解能光学データが実装加速化事業のソースデータとして活用される。" },
 
-  // 衛星等内（軌道上サービス）
   { source: "S16", target: "S17", type: "direct", reason: "OTVと軌道上燃料補給は軌道上サービスのコアパッケージ。" },
   { source: "S16", target: "S18", type: "direct", reason: "OTVの運用が宇宙ロジスティクスの中核活動。" },
   { source: "S17", target: "S18", type: "direct", reason: "燃料補給を含む軌道機動を宇宙ロジスティクスが管制・最適化する。" },
@@ -298,7 +349,6 @@ const links = [
   { source: "S20", target: "S21", type: "direct", reason: "デブリ除去と宇宙状況把握(SSA)は表裏一体。" },
   { source: "S21", target: "S18", type: "direct", reason: "SSAデータが宇宙ロジスティクスの衝突回避運用に必須。" },
 
-  // 探査等内
   { source: "E1", target: "E14", type: "direct", reason: "月水資源探査の成果が月面インフラ建設の前提条件。" },
   { source: "E13", target: "E14", type: "direct", reason: "月極域高精度着陸と月面インフラ構築は月面産業化の入口と本体。" },
   { source: "E7", target: "E14", type: "direct", reason: "再生型燃料電池が月面インフラの動力源として組み込まれる(トヨタLUNAR CRUISER)。" },
@@ -312,112 +362,89 @@ const links = [
   { source: "E15", target: "E6", type: "direct", reason: "船外利用効率化技術が低軌道汎用実験のスループットを向上。" },
   { source: "E12", target: "E14", type: "direct", reason: "ElevationSpaceは月面インフラ(月面分野)にもサンプルリターン技術を提供できる。" },
 
-  // 探査・衛星クロス
   { source: "E2", target: "S9", type: "direct", reason: "月-地球間通信FSとLEO-GEO光データ中継は通信スタックの異なる距離レンジとして接続される。" },
   { source: "E2", target: "S1", type: "direct", reason: "月-地球間長距離通信に量子暗号通信を組み合わせるとセキュア通信の優位性を確保。" },
   { source: "E11", target: "S9", type: "direct", reason: "軌道上データセンターは光データ中継サービスを必須インフラとする。" },
 
-  // 輸送→探査・衛星
   { source: "T6", target: "E5", type: "direct", reason: "有人輸送の与圧キャビン技術が低軌道自律モジュール(有人運用想定)に活用される。" },
   { source: "T3", target: "E12", type: "direct", reason: "再使用機洋上回収と高頻度物資回収は回収運用ノウハウを共有(海上での確保)。" },
   { source: "E9", target: "T7", type: "direct", reason: "大気突入空力減速技術が有人輸送の異常検知離脱(再突入カプセル)に活用される。" },
   { source: "E9", target: "E12", type: "direct", reason: "展開型エアロシェル(NeSTRA)が高頻度物資回収カプセルに直接適用される(Mars Touch Project)。" },
 
   // === シナジー(synergy) ===
-  // 探査内：探査でやっていることの相互応用
   { source: "E7", target: "E11", type: "synergy", reason: "再生型燃料電池は軌道上データセンターの電源/熱マネジメントにも応用可能。" },
   { source: "E8", target: "E11", type: "synergy", reason: "半永久電源は軌道上データセンターの長期電源にも応用可能。" },
 
-  // 衛星間シナジー
   { source: "S5", target: "S21", type: "synergy", reason: "高出力レーザのライダー技術がSSA(光学観測)にも応用可能。" },
   { source: "S5", target: "S20", type: "synergy", reason: "高出力レーザはデブリ除去(レーザーアブレーション)にも応用可能。" },
   { source: "S22", target: "S14", type: "synergy", reason: "革新的衛星ミッション技術が次世代地球観測の新規センサ実証枠として活用される。" },
   { source: "S22", target: "E6", type: "synergy", reason: "革新的衛星ミッション技術と低軌道汎用実験は実証プラットフォームとして補完。" },
 
-  // 月通信・月探査クラスタ
   { source: "E2", target: "E13", type: "synergy", reason: "月-地球間通信FSが月極域高精度着陸の通信回線として利用される。" },
   { source: "E2", target: "E14", type: "synergy", reason: "月-地球間通信FSが月面インフラの通信回線として利用される。" },
   { source: "E10", target: "E2", type: "synergy", reason: "月測位と月-地球間通信は月版PNT/通信網として相補。日本版LunaNetの2本柱。" },
 
-  // 軌道上サービス×回収
   { source: "S17", target: "E12", type: "synergy", reason: "軌道上燃料補給と物資回収は軌道上サービスの双方向で補完(往復ロジスティクス)。" },
   { source: "S16", target: "E12", type: "synergy", reason: "OTVが回収カプセルを月軌道から戻す役割で連携可能(ElevationSpace × ispace MoU)。" },
   { source: "S16", target: "E13", type: "synergy", reason: "OTVが月極域高精度着陸機の運搬手段として機能。" },
   { source: "S20", target: "S16", type: "synergy", reason: "デブリ除去にOTV技術を転用可能(把持・除去後の軌道変更)。" },
   { source: "S19", target: "E14", type: "synergy", reason: "軌道上製造・組立技術が月面インフラのIn-Situ Resource Utilizationに展開可能。" },
 
-  // 光通信×データ活用
   { source: "S9", target: "S15", type: "synergy", reason: "光データ中継により地球環境衛星データの即時配信が可能に。" },
   { source: "S9", target: "S23", type: "synergy", reason: "光データ中継がデータ実装加速化のリアルタイム性向上に貢献。" },
   { source: "S13", target: "S15", type: "synergy", reason: "衛星×地上統合運用が地球環境データのMNO経由配信を可能にする。" },
 
-  // 編隊飛行×高度応用
   { source: "S6", target: "S22", type: "synergy", reason: "編隊飛行が革新的衛星ミッション(分散型観測等)の実現基盤。" },
   { source: "S6", target: "S19", type: "synergy", reason: "編隊飛行技術が軌道上製造組立のランデブー精度に応用可能。" },
 
-  // 衛星サプライチェーン×応用
   { source: "S7", target: "S3", type: "direct", reason: "衛星部品サプライチェーンが商業衛星コンステ加速化の物理基盤。" },
   { source: "S7", target: "S14", type: "direct", reason: "衛星部品が次世代地球観測衛星の構成要素。" },
   { source: "S7", target: "S22", type: "direct", reason: "衛星部品が革新的衛星ミッションのバス基盤。" },
 
-  // 宇宙輸送×衛星等(打上げ需要)
   { source: "T9", target: "S3", type: "synergy", reason: "ロケット部品高度化が商業衛星コンステ用打上げのコスト・頻度を改善。" },
   { source: "T10", target: "S14", type: "synergy", reason: "製造プロセス刷新で打上げ機を量産することで、次世代観測コンステの構築を支える。" },
   { source: "T11", target: "S22", type: "synergy", reason: "スマート射場が革新的衛星ミッションの実証機会を増やす。" },
 
   // === 基盤・横断(foundation) ===
-  // SX-ARK 熱とデバイス → 多くの衛星・回収機テーマ
   { source: "C3", target: "S7", type: "foundation", reason: "SX-ARK熱とデバイス(ダイヤモンド半導体・ペロブスカイト電池等)が衛星部品の高度化に貢献。" },
   { source: "C3", target: "S14", type: "foundation", reason: "ダイヤモンド半導体による小型SARの熱制約打破(SX-ARK採択)が次世代地球観測に直結。" },
   { source: "C3", target: "S4", type: "foundation", reason: "ペロブスカイト太陽電池等の電源技術が高分解能光学衛星にも適用可能。" },
   { source: "C3", target: "E11", type: "foundation", reason: "熱制御・電源デバイスが軌道上データセンターの基盤技術。" },
   { source: "C3", target: "S22", type: "foundation", reason: "新規デバイスが革新的衛星ミッションのコア。" },
 
-  // SX-ARK 運動と制御 → OTV・編隊飛行・着陸
   { source: "C4", target: "S16", type: "foundation", reason: "SX-ARK運動と制御(マイクロ波放電型イオンエンジン等)がOTV推進系に直結。" },
   { source: "C4", target: "S6", type: "foundation", reason: "運動と制御の理論がフォーメーションフライトの精度を向上。" },
   { source: "C4", target: "E13", type: "foundation", reason: "運動と制御のGNC技術が月極域高精度着陸の中核。" },
   { source: "C4", target: "E12", type: "foundation", reason: "再突入軌道制御に運動と制御の研究が貢献。" },
 
-  // SX研究開発拠点(C1) → 多くのテーマ
   { source: "C1", target: "T1", type: "foundation", reason: "SX拠点(名古屋大デトネーション)で開発される推進技術が将来の輸送機推進系に貢献。" },
   { source: "C1", target: "E1", type: "foundation", reason: "SX拠点(東大宇宙資源)が月水資源探査の理論・装置基盤。" },
   { source: "C1", target: "E14", type: "foundation", reason: "SX拠点(立命館月面産業化)が月面インフラの研究基盤。" },
   { source: "C1", target: "S4", type: "foundation", reason: "SX拠点(東大次世代宇宙太陽電池)が衛星電源の高効率化に貢献。" },
 
-  // SX-CRANE → 地上応用との橋渡し
   { source: "C2", target: "E14", type: "foundation", reason: "SX-CRANE(早稲田 宇宙QOL/東女医大医療)が月面有人インフラの居住性に貢献。" },
   { source: "C2", target: "T6", type: "foundation", reason: "SX-CRANE(東京科学大 有人居住)が与圧キャビン人間工学に貢献。" },
   { source: "C2", target: "S23", type: "foundation", reason: "SX-CRANE(東京海洋大 PNT)が地上応用での衛星データ活用を深化。" },
   { source: "C2", target: "E15", type: "foundation", reason: "SX-CRANE(山形大 宇宙食)が船外利用効率化の食品・微小重力培養に貢献。" },
 
-  // 環境試験 → 多くのテーマ
   { source: "C5", target: "S7", type: "foundation", reason: "宇宙機環境試験(放射線・各種環境)が衛星部品の信頼性検証に必須。" },
   { source: "C5", target: "T9", type: "foundation", reason: "環境試験設備がロケット部品の認証に活用される。" },
   { source: "C5", target: "E12", type: "foundation", reason: "再突入カプセルの熱・力学試験設備として活用される。" },
   { source: "C5", target: "E5", type: "foundation", reason: "低軌道モジュールの宇宙環境試験に活用。" },
   { source: "C5", target: "S22", type: "foundation", reason: "革新的衛星ミッションの環境試験設備を提供。" },
 
-  // 統合航法・通信の基盤性
   { source: "T5", target: "S6", type: "foundation", reason: "統合航法装置技術が衛星編隊飛行の航法にも応用可能。" },
   { source: "T5", target: "E13", type: "foundation", reason: "統合航法技術が月着陸機の航法にも応用可能。" },
 
-  // 月-LEO-地上の連結シナジー
   { source: "E14", target: "S19", type: "synergy", reason: "月面インフラ建設と軌道上製造組立は構築・組立技術として相互応用可能。" },
   { source: "S18", target: "E12", type: "synergy", reason: "宇宙ロジスティクスが回収サービスを需要管理。" },
   { source: "E11", target: "S15", type: "synergy", reason: "軌道上データセンターが地球環境データのオンオービット解析を可能にする。" },
 
-  // 衛星データ×SX-CRANE地上応用
-  { source: "C2", target: "S23", type: "foundation", reason: "SX-CRANE地上応用拠点が衛星データ実装加速化の社会実装をドライブ。" },
-
-  // 月の通信×軌道上データセンター
   { source: "E11", target: "E2", type: "synergy", reason: "軌道上データセンターが月探査データの中継・解析点として機能。" },
 
-  // 地球観測×ライダー
   { source: "S5", target: "S14", type: "synergy", reason: "衛星ライダーが次世代地球観測の高度センシングに発展。" },
   { source: "S5", target: "S15", type: "synergy", reason: "ライダーデータが地球環境衛星データの計測種別を拡充。" },
 
-  // 多目的シナジー：環境試験×新型機
   { source: "C5", target: "T11", type: "foundation", reason: "スマート射場の安全試験に環境試験設備が貢献。" },
 ];
 
@@ -426,11 +453,10 @@ const links = [
 // ============================================================
 const svg = d3.select("#network");
 const tooltip = d3.select("#tooltip");
-let width = window.innerWidth - 280 - 380;
+let width = window.innerWidth - 280 - 400;
 let height = window.innerHeight - 70;
 svg.attr("width", width).attr("height", height);
 
-// ズーム
 const g = svg.append("g");
 const zoom = d3.zoom().scaleExtent([0.3, 3]).on("zoom", (e) => g.attr("transform", e.transform));
 svg.call(zoom);
@@ -439,11 +465,9 @@ d3.select("#zoomIn").on("click", () => svg.transition().call(zoom.scaleBy, 1.3))
 d3.select("#zoomOut").on("click", () => svg.transition().call(zoom.scaleBy, 1/1.3));
 d3.select("#zoomReset").on("click", () => svg.transition().call(zoom.transform, d3.zoomIdentity));
 
-// 色マップ
 const colorMap = { transport: "#d97706", satellite: "#2563eb", exploration: "#16a34a", common: "#b45309" };
 const catName = { transport: "宇宙輸送", satellite: "衛星等", exploration: "探査等", common: "分野共通" };
 
-// 初期位置（カテゴリ別にクラスタリング）
 const clusterCenters = {
   transport: { x: width * 0.22, y: height * 0.30 },
   satellite: { x: width * 0.65, y: height * 0.30 },
@@ -456,7 +480,6 @@ nodes.forEach(d => {
   d.y = c.y + (Math.random() - 0.5) * 150;
 });
 
-// Force simulation
 const simulation = d3.forceSimulation(nodes)
   .force("link", d3.forceLink(links).id(d => d.id).distance(d => d.type === "emerging" ? 80 : d.type === "direct" ? 100 : d.type === "synergy" ? 130 : 160).strength(d => d.type === "emerging" ? 0.8 : d.type === "direct" ? 0.5 : 0.2))
   .force("charge", d3.forceManyBody().strength(-450))
@@ -474,7 +497,9 @@ function forceCluster(strength) {
   };
 }
 
-// リンク描画
+const nodeMap = {};
+nodes.forEach(n => nodeMap[n.id] = n);
+
 const linkGroup = g.append("g").attr("class", "links");
 const link = linkGroup.selectAll("path")
   .data(links)
@@ -489,11 +514,6 @@ const link = linkGroup.selectAll("path")
   })
   .on("mouseout", () => tooltip.style("display", "none"));
 
-// ノードマップ
-const nodeMap = {};
-nodes.forEach(n => nodeMap[n.id] = n);
-
-// ノード描画
 const nodeGroup = g.append("g").attr("class", "nodes");
 const node = nodeGroup.selectAll("g")
   .data(nodes)
@@ -511,7 +531,6 @@ node.append("circle")
   .attr("stroke-width", 2)
   .attr("stroke-dasharray", d => d.period === 2 ? "3 2" : "none");
 
-// テキスト（複数行対応）
 node.append("text")
   .attr("text-anchor", "middle")
   .attr("y", 4)
@@ -524,7 +543,6 @@ node.append("text")
     });
   });
 
-// クリック
 node.on("click", (event, d) => {
   event.stopPropagation();
   showDetail(d);
@@ -536,17 +554,18 @@ svg.on("click", () => {
   clearDetail();
 });
 
-// マウスオーバーのツールチップ
 node.on("mouseover", (event, d) => {
+  const orgsText = d.orgs && d.orgs.length
+    ? `<br><span style="color:#8fb4e0">採択機関(${d.orgs.length}):</span> ${d.orgs.slice(0, 3).join(", ")}${d.orgs.length > 3 ? `... 他${d.orgs.length - 3}件` : ""}`
+    : "";
   tooltip.style("display", "block")
-    .html(`<b>${d.label.replace(/\n/g, " ")}</b><br>${catName[d.cat]}・第${d.period}期`);
+    .html(`<b>${d.label.replace(/\n/g, " ")}</b><br>${catName[d.cat]}・第${d.period}期${orgsText}`);
 })
 .on("mousemove", (event) => {
   tooltip.style("left", (event.pageX + 12) + "px").style("top", (event.pageY + 12) + "px");
 })
 .on("mouseout", () => tooltip.style("display", "none"));
 
-// シミュレーション更新
 simulation.on("tick", () => {
   link.attr("d", d => {
     const dx = d.target.x - d.source.x;
@@ -561,7 +580,6 @@ function dragStart(event, d) { if (!event.active) simulation.alphaTarget(0.3).re
 function dragging(event, d) { d.fx = event.x; d.fy = event.y; }
 function dragEnd(event, d) { if (!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }
 
-// ハイライト
 function highlightConnections(d) {
   const connectedIds = new Set([d.id]);
   links.forEach(l => {
@@ -579,9 +597,14 @@ function clearHighlight() {
   link.classed("dimmed", false);
 }
 
-// 詳細表示
 function showDetail(d) {
   const connected = links.filter(l => (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id);
+  const orgsHtml = d.orgs && d.orgs.length
+    ? `<div class="orgs-section">
+        <div class="orgs-title">採択機関（${d.orgs.length}件）</div>
+        ${d.orgs.map(o => `<span class="org-chip">${o}</span>`).join("")}
+      </div>`
+    : "";
   const html = `
     <h2>選択中のテーマ</h2>
     <div class="theme-title">${d.label.replace(/\n/g, "")}</div>
@@ -590,6 +613,7 @@ function showDetail(d) {
       <span>第${d.period}期</span>
     </div>
     <div class="theme-summary">${d.summary}</div>
+    ${orgsHtml}
     <div class="connections-section">
       <h2>つながり（${connected.length}件）</h2>
       ${connected.map(c => {
@@ -607,7 +631,6 @@ function showDetail(d) {
   document.getElementById("detail").className = "";
   document.getElementById("detail").innerHTML = html;
 
-  // 接続行クリック→そのノードへ
   document.querySelectorAll(".connection-row").forEach(el => {
     el.addEventListener("click", () => {
       const target = nodeMap[el.getAttribute("data-id")];
@@ -620,12 +643,11 @@ function clearDetail() {
   document.getElementById("detail").className = "empty";
   document.getElementById("detail").innerHTML = `
     <h2>技術テーマ詳細</h2>
-    <p>左の図でノード（円）をクリックすると、テーマの概要・他テーマとの技術的つながりがここに表示されます。</p>
-    <p style="margin-top:20px; font-size:11px; color:#6b7c95">この図は、宇宙戦略基金第一期・第二期の全採択テーマ（46件）について、技術的補完性・バリューチェーン上の連結・基盤共通性の3観点から、テーマ間に想定される技術的つながりを予測したものです。</p>
+    <p>左の図でノード（円）をクリックすると、テーマの概要・採択機関・他テーマとの技術的つながりがここに表示されます。</p>
+    <p style="margin-top:20px; font-size:11px; color:#6b7c95">この図は、宇宙戦略基金第一期・第二期の全採択テーマ（54件）について、技術的補完性・バリューチェーン上の連結・基盤共通性の3観点から、テーマ間に想定される技術的つながりを予測したものです。</p>
   `;
 }
 
-// フィルタ
 let activeCat = "all";
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -654,9 +676,10 @@ function applyFilter() {
   }
 }
 
-// 統計
+const totalOrgs = nodes.reduce((sum, n) => sum + (n.orgs ? n.orgs.length : 0), 0);
 document.getElementById("stats").innerHTML = `
   <strong>テーマ数:</strong> ${nodes.length}件<br>
+  <strong>採択機関数:</strong> 延べ${totalOrgs}機関<br>
   <strong>連携数:</strong> ${links.length}本<br>
   &nbsp;&nbsp;進行中: ${links.filter(l=>l.type==="emerging").length}<br>
   &nbsp;&nbsp;直接連結: ${links.filter(l=>l.type==="direct").length}<br>
@@ -664,9 +687,8 @@ document.getElementById("stats").innerHTML = `
   &nbsp;&nbsp;基盤・横断: ${links.filter(l=>l.type==="foundation").length}
 `;
 
-// リサイズ対応
 window.addEventListener("resize", () => {
-  width = window.innerWidth - 280 - 380;
+  width = window.innerWidth - 280 - 400;
   height = window.innerHeight - 70;
   svg.attr("width", width).attr("height", height);
   simulation.force("center", d3.forceCenter(width / 2, height / 2));
